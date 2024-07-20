@@ -31,7 +31,7 @@ unzip_data = BashOperator(
     dag=dag,
 )
 
-# Task 2.2: Submit screenshot for the Create a task to extract data from csv file task.
+# Task 2.2: Create a task to extract data from csv file task.
 extract_data_from_csv = BashOperator(
     task_id="extract_data_from_csv",
     bash_command=(
@@ -41,7 +41,7 @@ extract_data_from_csv = BashOperator(
     dag=dag,
 )
 
-# Task 2.3: Submit screenshot for the Create the extract data from tsv file task.
+# Task 2.3: Create the extract data from tsv file task.
 # cut -f5,6,7 tollplaza-data.tsv | sed 's/\t/,/g' | tr -d '\r' > tsv_data.csv
 # tr -d removes a character from file \r gives error in paste command thus deleted.
 # od -c -> command that display file contents, -c means characters or backlslash escapes
@@ -55,7 +55,7 @@ extract_data_from_tsv = BashOperator(
     dag=dag,
 )
 
-# Task 2.4: Submit screenshot for the Create a task to extract data from fixed width file task.
+# Task 2.4: Create a task to extract data from fixed width file task.
 # Extract the fields Type of Payment code, and Vehicle Code
 # cut -c 59-67 payment-data.txt > fixed_width_data.csv | tr " " "," > fixed_width_data.csv
 extract_data_from_fixed_width = BashOperator(
@@ -67,7 +67,7 @@ extract_data_from_fixed_width = BashOperator(
     dag=dag,
 )
 
-# Task 2.5: Submit screenshot for the Create a task to consolidate data extracted from previous tasks
+# Task 2.5: Create a task to consolidate data extracted from previous tasks
 # Define the consolidate_data task using the BashOperator
 # paste -d',' csv_data.csv tsv_data.csv fixed_width_data.csv > extracted_data2.csv
 consolidate_data = BashOperator(
@@ -82,7 +82,7 @@ consolidate_data = BashOperator(
 )
 
 
-# Task 2.6: Submit screenshot for the Transform the data task.
+# Task 2.6: Transform the data task.
 # awk -F',' 'NR==1{print; next} {print $1 "," $2 "," $3 "," toupper($4) "," $5 "," $6 "," $7 "," $8 "," $9}' extracted_data.csv > transformed_data.csv
 transform_data = BashOperator(
     task_id="transform_data",
@@ -101,7 +101,7 @@ transform_data = BashOperator(
     dag=dag,
 )
 
-# Task 2.7: Submit screenshot for the Define the task pipeline task.
+# Task 2.7: Define the task pipeline task.
 
 (
     unzip_data
@@ -111,6 +111,3 @@ transform_data = BashOperator(
     >> consolidate_data
     >> transform_data
 )
-
-
-# Task 3.1: Submit screenshot for the Submit the DAG task.
