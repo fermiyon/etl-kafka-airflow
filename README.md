@@ -201,6 +201,8 @@ airflow dags list-runs -d ETL_toll_data
 
 ![alt text](screenshots/dag_sucess.png)
 
+<video controls src="screenshots/airflow-etl.mp4" title="Title"></video>
+
 ## Contributing
 
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
